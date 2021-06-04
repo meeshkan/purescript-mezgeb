@@ -2,7 +2,7 @@ name: Tests
 on: push
 jobs:
   container-job:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     container: node:14
     steps:
       - name: Check out repository code
