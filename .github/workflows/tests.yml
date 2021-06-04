@@ -3,7 +3,7 @@ on: push
 jobs:
   container-job:
     runs-on: ubuntu-latest
-    container: node:14
+    container: node:16.3.0
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
