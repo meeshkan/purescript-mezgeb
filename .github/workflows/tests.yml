@@ -3,9 +3,7 @@ on: push
 jobs:
   container-job:
     runs-on: ubuntu-latest
-    env:
-      CALLING_FROM_GITHUB: yes
-    container: node:10.18-jessie
+    container: node:14
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
