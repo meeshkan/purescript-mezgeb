@@ -1,0 +1,16 @@
+{
+  "name": "purescript-mezgeb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "spago -x test.dhall test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "purescript": "^0.14.1",
+    "spago": "^0.20.3"
+  }
+}
