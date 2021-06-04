@@ -6,9 +6,6 @@ jobs:
     env:
       CALLING_FROM_GITHUB: yes
     container: node:10.18-jessie
-    defaults:
-      run:
-        working-directory: ./mkn-ps
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -20,14 +17,14 @@ jobs:
         with:
           path: |
               ~/.npm
-              mkn-ps/.spago
+              .spago
               ${{ env.spago_global_cache }}
-              mkn-ps/output
+              output
           key: >-
-              ${{ hashFiles('mkn-ps/package-lock.json') }}-
-              ${{ hashFiles('mkn-ps/spago.dhall') }}-
-              ${{ hashFiles('mkn-ps/packages.dhall') }}-
-              ${{ hashFiles('mkn-ps/test.dhall') }}
+              ${{ hashFiles('package-lock.json') }}-
+              ${{ hashFiles('spago.dhall') }}-
+              ${{ hashFiles('packages.dhall') }}-
+              ${{ hashFiles('test.dhall') }}
       - name: Install dependencies
         run: npm ci
       - name: Spago install
