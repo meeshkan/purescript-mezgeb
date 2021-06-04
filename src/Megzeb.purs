@@ -11,7 +11,7 @@ import Type.Proxy (Proxy)
 data MegzebGet
   = MegzebGet
 
-instance megzebGet ::
+instance mezgebGet ::
   (IsSymbol l, Cons l x i' i, Lacks l o', Cons l x o' o) =>
   FoldingWithIndex MegzebGet (Proxy l) ({ | i } /\ { | o' }) ignore ({ | i } /\ { | o }) where
   foldingWithIndex MegzebGet prop (i /\ o') _ = i /\ Record.insert prop (Record.get prop i) o'
@@ -25,7 +25,7 @@ get r i = snd (hfoldlWithIndex MegzebGet (i /\ {}) r)
 data MegzebSet
   = MegzebSet
 
-instance megzebSet ::
+instance mezgebSet ::
   (IsSymbol l, Cons l a r i, Cons l b r o) =>
   FoldingWithIndex MegzebSet (Proxy l) { | i } b { | o } where
   foldingWithIndex MegzebSet prop i b = Record.set prop b i
@@ -39,7 +39,7 @@ set r i = hfoldlWithIndex MegzebSet i r
 data MegzebModify
   = MegzebModify
 
-instance megzebModify ::
+instance mezgebModify ::
   (IsSymbol l, Cons l a r i, Cons l b r o) =>
   FoldingWithIndex MegzebModify (Proxy l) { | i } (a -> b) { | o } where
   foldingWithIndex MegzebModify prop i ab = Record.modify prop ab i
@@ -53,7 +53,7 @@ modify r i = hfoldlWithIndex MegzebModify i r
 data MegzebInsert
   = MegzebInsert
 
-instance megzebInsert ::
+instance mezgebInsert ::
   (IsSymbol l, Lacks l i, Cons l a i o) =>
   FoldingWithIndex MegzebInsert (Proxy l) { | i } a { | o } where
   foldingWithIndex MegzebInsert prop i a = Record.insert prop a i
@@ -67,7 +67,7 @@ insert r i = hfoldlWithIndex MegzebInsert i r
 data MegzebDelete
   = MegzebDelete
 
-instance megzebDelete ::
+instance mezgebDelete ::
   (IsSymbol l, Lacks l o, Cons l x o i) =>
   FoldingWithIndex MegzebDelete (Proxy l) { | i } ignore { | o } where
   foldingWithIndex MegzebDelete prop i _ = Record.delete prop i
