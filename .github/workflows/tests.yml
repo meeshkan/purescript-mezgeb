@@ -1,0 +1,40 @@
+name: Tests
+on: push
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    env:
+      CALLING_FROM_GITHUB: yes
+    container: node:10.18-jessie
+    defaults:
+      run:
+        working-directory: ./mkn-ps
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set cache location
+        run: |
+            echo "spago_global_cache=$HOME/.cache/spago" >> $GITHUB_ENV
+      - name: Cache purescript dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+              ~/.npm
+              mkn-ps/.spago
+              ${{ env.spago_global_cache }}
+              mkn-ps/output
+          key: >-
+              ${{ hashFiles('mkn-ps/package-lock.json') }}-
+              ${{ hashFiles('mkn-ps/spago.dhall') }}-
+              ${{ hashFiles('mkn-ps/packages.dhall') }}-
+              ${{ hashFiles('mkn-ps/test.dhall') }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Spago install
+        run: npx spago -x test.dhall install
+      - name: Spago build
+        run: npx spago -x test.dhall build
+      - name: Install dependencies
+        run: npm ci
+      - name: Spago test
+        run: npm test
