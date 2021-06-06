@@ -18,6 +18,7 @@ to generate this file without the comments in this block.
   , "prelude"
   , "psci-support"
   , "record"
+  , "spec"
   , "tuples"
   ]
 , packages = ./packages.dhall
