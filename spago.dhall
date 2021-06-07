@@ -12,9 +12,7 @@ to generate this file without the comments in this block.
 -}
 { name = "mezgeb"
 , dependencies =
-  [ "aff"
-  , "effect"
-  , "heterogeneous"
+  [ "heterogeneous"
   , "prelude"
   , "psci-support"
   , "record"
