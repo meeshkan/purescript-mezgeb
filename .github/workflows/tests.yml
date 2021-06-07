@@ -1,9 +1,11 @@
 name: Tests
 on: push
 jobs:
-  container-job:
+  build:
     runs-on: ubuntu-latest
-    container: node:16.3.0
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
