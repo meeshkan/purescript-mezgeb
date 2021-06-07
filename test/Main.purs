@@ -19,7 +19,7 @@ main =
           it "gets" do
             Mezgeb.get { a: unit } { a: 3, d: 4 } `shouldEqual` { a: 3 }
           it "deletes" do
-            Megzeb.delete
+            Mezgeb.delete
               { b: 0, c: 0, d: 0 }
               { a: 1, b: 2, c: true, d: false, e: unit, f: [ 1 ], g: 5 }
               `shouldEqual`
