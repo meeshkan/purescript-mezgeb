@@ -9,6 +9,20 @@ import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (runSpec)
 
+testLacks :: forall r. Mezgeb.Lacks ( hello :: Unit, world :: Unit ) r => { | r } -> Unit
+testLacks = const unit
+
+testCons :: forall r. Mezgeb.Cons ( hello :: Int, world :: Number ) r => { | r } -> Unit
+testCons = const unit
+
+a = testLacks { a: 1 } :: Unit
+
+--fails correctly
+--b = testLacks {hello:1} :: Unit
+a' = testCons { hello: 1, world: 2.0 } :: Unit
+
+--fails correctly
+--b = testLacks {hello:1} :: Unit
 main :: Effect Unit
 main =
   launchAff_
